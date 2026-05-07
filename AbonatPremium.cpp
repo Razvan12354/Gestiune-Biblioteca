@@ -8,14 +8,9 @@ AbonatPremium* AbonatPremium::clone() const {
     return new AbonatPremium(*this);
 }
 
-double AbonatPremium::calculScorSpecific() const {
-    double scorBaza = (this->varsta * 0.5) + (this->durataAbonament > 12 ? 40 : this->durataAbonament * 3);
-    return scorBaza + 30.0; // Bonus fix pentru abonament de tip premium
-}
-
 void AbonatPremium::do_print(std::ostream& out) const {
     out << "Abonat PREMIUM | " << nume << " " << prenume 
-        << " | Taxa: " << taxaPremium << " RON | Scor: " << scorIncredere() << "/100";
+        << " | Taxa: " << taxaPremium << " RON ";
 }
 
 void swap(AbonatPremium& first, AbonatPremium& second) noexcept {

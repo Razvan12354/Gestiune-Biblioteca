@@ -12,7 +12,9 @@ private:
     bool esteReturnata;
     Carti *carteImprumutata;
     Abonati *abonatAsociat;
+    Abonati& abonat;
     static float taxaPenalizarePeZi;
+    int zileScurse;
 
 public:
     // Constructor
@@ -23,19 +25,27 @@ public:
 
     ~Imprumuturi();
 
-    // Getters
+    // Getters + Setters
     const char* getCNP() const;
 
     const char* getIdCarte() const;
 
     const char* getDataImprumut() const;
 
+    double getTaxaPenalizare() const;
+
     int getPerioadaZile() const;
+
+    int getZileScurse() const { return zileScurse; }
+
+    void setZileScurse(int nr) { zileScurse = nr; }
 
     // Finalizare imprumut + supraincarcare
 
     void finalizeazaImprumut();
     void finalizeazaImprumut(int var_zileReale);
+
+    Abonati& getAbonat() { return abonat; }
 
     static void setTaxaPenalizare(float var_taxa);
 
@@ -44,6 +54,9 @@ public:
     // Copy and swap
     friend void swap(Imprumuturi& first, Imprumuturi& second) noexcept;
     Imprumuturi& operator=(const Imprumuturi& nou);
+
+    // Crestere counter zile scurse de cand a fost facut imprumutul
+    void crestereZileScurse(int nr) { zileScurse += nr; }
 };
 
 #endif

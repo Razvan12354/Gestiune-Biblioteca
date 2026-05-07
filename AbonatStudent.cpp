@@ -40,16 +40,10 @@ AbonatStudent* AbonatStudent::clone() const {
     return new AbonatStudent(*this);
 }
 
-// Logica de calcul a scorului pentru student
-double AbonatStudent::calculScorSpecific() const {
-    double scorBaza = (this->varsta * 0.5) + (this->durataAbonament > 12 ? 40 : this->durataAbonament * 3);
-    return scorBaza + 20; // Bonus de student
-}
-
 // Afisare operator<<
 void AbonatStudent::do_print(std::ostream& out) const {
     out << "Abonat STUDENT | " << nume << " " << prenume 
-        << " | Univ: " << universitate << " | Scor: " << scorIncredere() << "/100";
+        << " | Universitate: " << universitate;
 }
 
 // Destructor

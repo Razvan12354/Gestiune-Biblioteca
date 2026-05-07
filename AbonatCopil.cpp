@@ -9,16 +9,10 @@ AbonatCopil* AbonatCopil::clone() const {
     return new AbonatCopil(*this);
 }
 
-// Scor Educativ
-double AbonatCopil::calculScorSpecific() const {
-    double scorBaza = (this->varsta * 0.5) + (this->durataAbonament > 12 ? 40 : this->durataAbonament * 3);
-    return scorBaza + 10.0;
-}
-
 // Afisare specifica
 void AbonatCopil::do_print(std::ostream& out) const {
     out << "Abonat COPIL   | " << nume << " " << prenume 
-        << " | Varsta: " << varsta << " ani | Scor: " << scorIncredere() << "/100";
+        << " | Varsta: " << varsta << " ani ";
 }
 
 void swap(AbonatCopil& first, AbonatCopil& second) noexcept {

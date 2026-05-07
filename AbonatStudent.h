@@ -7,7 +7,6 @@ class AbonatStudent : public Abonati{
 private:
     char* universitate;
 protected:
-    double calculScorSpecific() const override;
     void do_print(std::ostream& out) const override; // Interfata non-virtuala
 public:
     // Constructor care primeste parametri pentru baza si pentru derivata
@@ -16,6 +15,9 @@ public:
 
     // Constructor de copiere
     AbonatStudent(const AbonatStudent& nou);
+
+    // Getters
+    char* getUniversitate() const { return universitate; }
 
     // operator=
     AbonatStudent& operator=(const AbonatStudent& nou);

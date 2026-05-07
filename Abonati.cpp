@@ -33,6 +33,7 @@ Abonati::Abonati(const char *var_nume, const char *var_prenume, const char *var_
     nrCartiImprumutate = 0;
     balantaPenalizari = 0.0;
     nrTotalAbonati++;
+    this->scorIncredere = 60;
 }
 
 // Constructor de copiere
@@ -51,6 +52,7 @@ Abonati::Abonati(const Abonati& nou) {
     nrCartiImprumutate = nou.nrCartiImprumutate;
     balantaPenalizari = nou.balantaPenalizari;
     nrTotalAbonati++;
+    this->scorIncredere = nou.scorIncredere;
 }
 
 
@@ -97,25 +99,21 @@ std::ostream& operator<<(std::ostream& out, const Abonati& a) {
 }
 
 // Trecere timp (scade durata abonamentului)
-void Abonati::trecereTimp(int luni) {
-    if (this->durataAbonament >= luni) {
-        this->durataAbonament -= luni;
-        std::cout << "Au trecut " << luni << " luni. Durata ramasa pentru " << nume << ": " << durataAbonament << " luni." << std::endl;
+void Abonati::trecereTimp(int zile) {
+    if (this->durataAbonament >= zile) {
+        this->durataAbonament -= zile;
+        std::cout << "Au trecut " << zile << " zile. Durata ramasa pentru " << nume << ": " << durataAbonament << " luni." << std::endl;
     } else {
         this->durataAbonament = 0;
         std::cout << "Abonamentul pentru " << nume << " a expirat!" << std::endl;
     }
+}
 
-    // Daca abonamentul a expirat si inca are carti, aplicam penalizare automata
-    if (this->durataAbonament == 0 && this->nrCartiImprumutate > 0) {
-        double penalizareExtra = 10.0 * this->nrCartiImprumutate;
-        this->adaugaPenalizare(penalizareExtra);
-        std::cout << "S-a aplicat o penalizare de intarziere: " << penalizareExtra << " RON." << std::endl;
-    }
-
-    // Afisam noul scor de incredere
-    std::cout << "Noul scor de incredere: " << this->scorIncredere() << "/100" << std::endl;
-    std::cout << "---------------------------------------" << std::endl;
+// Modificare scor incredere
+void Abonati::modificaScor(int puncte) {
+    scorIncredere += puncte;
+    if (scorIncredere > 100) scorIncredere = 100;
+    if (scorIncredere < 0) scorIncredere = 0;
 }
 
 // Copy and swap
@@ -177,6 +175,7 @@ Abonati& Abonati::operator=(const Abonati& nou) {
         durataAbonament = nou.durataAbonament;
         nrCartiImprumutate = nou.nrCartiImprumutate;
         balantaPenalizari = nou.balantaPenalizari;
+        this->scorIncredere = nou.scorIncredere;
     }
     return *this;
 }

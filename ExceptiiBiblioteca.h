@@ -32,4 +32,12 @@ public:
     ExceptieRegulament(const std::string& m): ExceptieBiblioteca("Eroare de regulament: " + m) {}
 }; 
 
+// Daca un abonat copil incearca sa imprumute o carte pentru adulti
+class ExceptieVarsta : public std::exception {
+public:
+    const char* what() const noexcept override {
+        return "Acces interzis: Copiii nu pot imprumuta carti pentru adulti.";
+    }
+};
+
 #endif

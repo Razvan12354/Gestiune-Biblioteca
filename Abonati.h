@@ -9,9 +9,7 @@ protected:
     int varsta, durataAbonament, nrCartiImprumutate;
     double balantaPenalizari;
     static int nrTotalAbonati;
-
-    virtual double calculScorSpecific() const = 0; // = 0 inseamna functie pur virtuala
-
+    int scorIncredere;
     virtual void do_print(std::ostream& out) const = 0;
 
 
@@ -30,10 +28,6 @@ public:
     // Constructor virtual (clone)
     virtual Abonati* clone() const = 0; // = 0 inseamna functie pur virtuala
 
-    // Interfata non-virtuala pentru calculul scorului de incredere
-    double scorIncredere() const{
-        return this->calculScorSpecific();
-    }
 
     void afisare(std::ostream& out) const {
         do_print(out);
@@ -42,10 +36,15 @@ public:
     // Getters + Setters
     char* getCNP() const { return CNP; }
     char* getNume() const { return nume; }
+    char* getPrenume() const { return prenume; }
+    char* getTelefon() const { return telefon; }
+    int getVarsta() const { return varsta; }
     int getNrCartiImprumutate() const { return nrCartiImprumutate; }
     double getBalantaPenalizari() const { return balantaPenalizari; }
-
+    int getDurataAbonament() const { return durataAbonament; }
     void setNrCartiImprumutate(int nr) { nrCartiImprumutate = nr; }
+    int getScorIncredere() const { return scorIncredere; }
+    void setScorIncredere(int s) { scorIncredere = s; }
 
     // Metode 
     void adaugaPenalizare(double suma);
@@ -55,6 +54,9 @@ public:
     void prelungireAbonament(int luni);
     bool poateImprumuta() const;
     void trecereTimp(int luni);
+    void modificaScor(int puncte);
+
+    virtual double calculScorSpecific() const { return (double)scorIncredere; }
 
     friend std::ostream& operator<<(std::ostream& out, const Abonati& a);
 

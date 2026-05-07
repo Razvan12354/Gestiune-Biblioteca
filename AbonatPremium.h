@@ -8,8 +8,6 @@ private:
     double taxaPremium;
 
 protected:
-    // Suprascriere metoda virtuala
-    double calculScorSpecific() const override;
     void do_print(std::ostream& out) const override; // Interfata non-virtuala
 
 public:
@@ -19,6 +17,9 @@ public:
     
     // Constructor virtual (clone)
     AbonatPremium* clone() const override;
+
+    // Getters
+    int getTaxaMentenanta() const { return taxaPremium; }
 
     // operator=
     AbonatPremium& operator=(const AbonatPremium& nou);

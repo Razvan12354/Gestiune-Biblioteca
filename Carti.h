@@ -5,6 +5,7 @@
 
 class Carti{
 private:
+    bool doarAdulti, laPromotie;
     char* titlu, *autor, *idCarte;
     int anAparitie, stocDisponibil;
     static int nrTotalCarti;
@@ -12,7 +13,7 @@ private:
 public:
     // Constructor
     Carti(const char *var_titlu, const char *var_autor, const char* var_idCarte, 
-        int var_anAparitie, int var_stocDisponibil);
+        int var_anAparitie, int var_stocDisponibil, bool adult, bool promo);
     
     Carti(const Carti& noua);
 
@@ -25,9 +26,23 @@ public:
     bool esteDisponibila() const;
     
     const char* getTitlu() const;
+
     const char* getId() const;
 
+    int getStoc() const { return stocDisponibil; }
+
     static int getNrTotalCarti();
+
+    const char* getAutor() const;
+
+    int getAnAparitie() const;
+
+    bool esteDoarAdulti() const { return doarAdulti; }
+    bool esteLaPromotie() const { return laPromotie; }
+
+    void scadeStoc();
+
+    void elibereazaCarte();
 
     friend std::ostream& operator<<(std::ostream& out, const Carti& c);
 

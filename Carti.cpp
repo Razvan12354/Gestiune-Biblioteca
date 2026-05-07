@@ -4,7 +4,7 @@
 int Carti::nrTotalCarti = 0;
 
 // Constructor
-Carti::Carti(const char* var_titlu, const char* var_autor, const char* var_idCarte, int var_anAparitie, int var_stocDisponibil){
+Carti::Carti(const char* var_titlu, const char* var_autor, const char* var_idCarte, int var_anAparitie, int var_stocDisponibil, bool adult, bool promo){
     this->titlu = new char[strlen(var_titlu)+1];
     strcpy(this->titlu,var_titlu);
 
@@ -17,6 +17,10 @@ Carti::Carti(const char* var_titlu, const char* var_autor, const char* var_idCar
     this->anAparitie = var_anAparitie;
 
     this->stocDisponibil = var_stocDisponibil;
+
+    this->doarAdulti = adult;
+
+    this->laPromotie = promo;
 
     nrTotalCarti++;
 }
@@ -35,6 +39,10 @@ Carti::Carti(const Carti& noua){
     this->anAparitie = noua.anAparitie;
 
     this->stocDisponibil = noua.stocDisponibil;
+
+    this->doarAdulti = noua.doarAdulti;
+
+    this->laPromotie = noua.laPromotie;
 
     nrTotalCarti++;
 }
@@ -105,8 +113,26 @@ const char* Carti::getId() const {
     return this->idCarte;
 }
 
+const char* Carti::getAutor() const {
+    return this->autor;
+}
+
+int Carti::getAnAparitie() const {
+    return this->anAparitie;
+}
+
 int Carti::getNrTotalCarti() {
     return nrTotalCarti;
+}
+
+void Carti::scadeStoc() {
+    if (this->stocDisponibil > 0) {
+        this->stocDisponibil--;
+    }
+}
+
+void Carti::elibereazaCarte() {
+    this->stocDisponibil++;
 }
 
 // Afisare operator<<

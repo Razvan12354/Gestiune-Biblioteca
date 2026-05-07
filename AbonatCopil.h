@@ -5,8 +5,6 @@
 
 class AbonatCopil : public Abonati {
 protected:
-    // Schimbam modul in care se calculeaza scorul pentru copii
-    double calculScorSpecific() const override;
     void do_print(std::ostream& out) const override; // Interfata non-virtuala
 
 public:
